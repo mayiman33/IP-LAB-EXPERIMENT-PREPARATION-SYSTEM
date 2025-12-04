@@ -4,57 +4,67 @@
 <head>
     <title>${title} - Lab System</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px;
             background: #0F1A27;
             color: white;
         }
         .container {
-            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .header {
-            margin-bottom: 2rem;
-        }
-        .header h1 {
+        h1 {
             color: #8AA9FF;
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
         }
-        .cards {
+        .subtitle {
+            color: #A8B5C8;
+            margin-bottom: 30px;
+        }
+        .card-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
         }
         .card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
             border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        .card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #8AA9FF;
+            transform: translateY(-2px);
         }
         .card h3 {
             color: #8AA9FF;
             margin-top: 0;
         }
-        .btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: #8AA9FF;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 1rem;
+        .card p {
+            color: #A8B5C8;
+            font-size: 14px;
         }
         .nav {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
         .nav a {
             color: #97A2B7;
             text-decoration: none;
+            padding: 5px 10px;
         }
         .nav a.active {
             color: white;
@@ -71,17 +81,20 @@
             <a href="${pageContext.request.contextPath}/">Dashboard</a>
         </div>
         
-        <div class="header">
-            <h1>${title}</h1>
-            <p>${module}</p>
-        </div>
+        <h1>${title}</h1>
+        <p class="subtitle">${module}</p>
         
-        <div class="cards">
-            <div class="card">
-                <h3>📋 Experiment Reports</h3>
-                <p>Generate detailed reports of laboratory experiments including scheduling, usage, and results.</p>
-                <a href="${pageContext.request.contextPath}/reports/generate?type=experiment" class="btn">Generate</a>
-            </div>
+        <div class="card-container">
+            <a href="${pageContext.request.contextPath}/reports/generate" class="card">
+                <h3>📊 Generate Report</h3>
+                <p>Create new reports with custom parameters and export formats</p>
+            </a>
             
-            <div class="card">
-                <h3>
+            <a href="${pageContext.request.contextPath}/reports/list" class="card">
+                <h3>📋 Report List</h3>
+                <p>View and manage previously generated reports</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -21,4 +21,10 @@ public class NotificationController {
         model.addAttribute("title", "Notification List");
         return "notifications/list";
     }
+    
+    @GetMapping("/settings")
+    public String notificationSettings(Model model) {
+        model.addAttribute("title", "Notification Settings");
+        return "notifications/settings";
+    }
 }

@@ -9,8 +9,8 @@ public class HomeController {
     
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("message", "LAB EXPERIMENT PREPARATION SYSTEM");
-        model.addAttribute("systemName", "LabCore");
+        model.addAttribute("message", "Laboratory Booking System");
+        model.addAttribute("systemName", "Spring Boot JSP Project");
         return "index";
     }
 }
