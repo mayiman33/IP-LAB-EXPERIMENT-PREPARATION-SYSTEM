@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab Booking Request</title>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: 'Inter', sans-serif;
+            background: #0F1A27; /* Dark Background */
+            color: white;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05); /* Slightly lighter background for the form block */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .section-title {
+            font-size: 24px;
+            color: #8AA9FF; /* Blue accent color */
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #A8B5C8;
+        }
+        input[type="text"], input[type="date"], input[type="time"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+            box-sizing: border-box;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        /* Button Styling */
+        button[type="submit"] {
+            background: #8AA9FF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+            font-family: inherit;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background: #6c8eff;
+        }
+        .system-nav {
+            margin-top: 20px;
+            padding-top: 10px;
+        }
+        .system-nav a {
+            color: #8AA9FF;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="section-title">🧪 Lab Equipment/Area Booking Request</div>
+        
+        <form th:action="@{/request/save}" th:object="${requestForm}" method="post">
+            
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" th:field="*{requesterName}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="equipment">Equipment/Area:</label>
+                <select id="equipment" th:field="*{equipmentName}" required>
+                    <option value="">-- Select --</option>
+                    <option value="Microscope Area">Microscope Area</option>
+                    <option value="Fume Hood 2">Fume Hood 2</option>
+                    <option value="Centrifuge">Centrifuge (Model X)</option>
+                    <option value="General Bench 1-5">General Bench (1-5)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date of Use:</label>
+                <input type="date" id="date" th:field="*{date}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Time Slot:</label>
+                <input type="time" id="start" th:field="*{startTime}" required>
+                to
+                <input type="time" id="end" th:field="*{endTime}" required>
+            </div>
+
+            <button type="submit">Submit Booking Request</button>
+        </form>
+        
+        <div class="system-nav">
+             <a th:href="@{/schedule}">View Schedule Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab Timetable</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: #0F1A27; /* Dark Background */
+            color: white;
+        }
+        /* Top Navigation Styling */
+        .nav {
+            display: flex;
+            padding: 25px 50px;
+            font-size: 20px;
+            gap: 40px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .nav a {
+            text-decoration: none;
+            color: #97A2B7;
+            font-weight: 300;
+        }
+        .nav a:hover, .nav a.active {
+            color: white;
+            border-bottom: 2px solid #8AA9FF;
+            padding-bottom: 5px;
+        }
+        .container {
+            padding: 40px 60px;
+        }
+        .section-title {
+            font-size: 24px;
+            color: #8AA9FF; /* Blue accent color */
+            margin-bottom: 20px;
+        }
+        /* Table Styling */
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .history-table th, .history-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .history-table th {
+            color: #A8B5C8;
+            font-weight: 400;
+        }
+        /* Filter Bar and Elements */
+        .filter-bar {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .filter-select {
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 5px;
+            font-family: inherit; 
+            font-size: 16px;
+            width: auto; /* Fix for dropdown width */
+        }
+        .view-btn {
+            background: #8AA9FF;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+            font-family: inherit; 
+            font-size: 16px;
+        }
+        .view-btn:hover {
+            background: #6c8eff;
+        }
+        /* Status Badges */
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .status-completed {
+            background: rgba(78, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+        .status-cancelled {
+            background: rgba(255, 82, 82, 0.2);
+            color: #FF5252;
+        }
+        .status-pending {
+            background: rgba(255, 166, 92, 0.2);
+            color: #FFA65C;
+        }
+        .system-nav {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .system-nav a {
+            color: #8AA9FF;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="nav">
+        <a th:href="@{/schedule}" class="active">Schedule</a>
+        <a th:href="@{/request/new}">Request Booking</a>
+        <a href="#">Inventory</a>
+    </div>
+
+    <div class="container">
+        <div class="section-title">📅 Current Lab Schedule & Timetable</div>
+        
+        <div class="filter-bar">
+            <select class="filter-select">
+                <option>Filter by Status</option>
+                <option>Completed</option>
+                <option>Pending</option>
+            </select>
+            <select class="filter-select">
+                <option>Filter by Area</option>
+            </select>
+            <button class="view-btn">Apply Filters</button>
+        </div>
+        
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Subject/Area</th>
+                    <th>Time Slot (Date & Time)</th>
+                    <th>Reserved By</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="booking, iterStat : ${bookingList}">
+                    <td th:text="${booking.subject}">[Subject Placeholder]</td>
+                    <td th:text="${booking.timeSlot}">[Time Slot Placeholder]</td>
+                    <td th:text="${booking.reservedBy}">[Reserved By Placeholder]</td>
+                    
+                    <td>
+                        <span th:class="${(iterStat.index % 3 == 0) ? 'status-badge status-completed' : 
+                                        (iterStat.index % 3 == 1) ? 'status-badge status-pending' : 
+                                        'status-badge status-cancelled'}"
+                              th:text="${(iterStat.index % 3 == 0) ? 'Completed' : 
+                                         (iterStat.index % 3 == 1) ? 'Pending' : 
+                                         'Cancelled'}">
+                            Completed
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="system-nav">
+             <a th:href="@{/request/new}">Go to Booking Request Form</a>
+        </div>
+    </div>
+</body>
+</html>
