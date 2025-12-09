@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Book Lab - Lab System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0F1A27;
+            color: white;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #8AA9FF;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: #97A2B7;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: white;
+            background: rgba(138, 169, 255, 0.1);
+        }
+        
+        .nav-link.active {
+            color: white;
+            background: rgba(138, 169, 255, 0.2);
+            border-bottom: 2px solid #8AA9FF;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            color: #8AA9FF;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #A8B5C8;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #8AA9FF;
+            box-shadow: 0 0 0 2px rgba(138, 169, 255, 0.2);
+        }
+        
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2397A2B7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1em;
+            padding-right: 2.5rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: #8AA9FF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #6c8ffc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(138, 169, 255, 0.2);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+        }
+        
+        /* Form Card */
+        .form-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span>⚗️</span>
+            <span>Lab System</span>
+        </div>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/booking" class="nav-link active">Book Lab</a>
+            <a href="/timetable" class="nav-link">Timetable</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1 class="section-title">Book a Lab</h1>
+        
+        <div class="form-card">
+            <form action="/submit-booking" method="post">
+                <div class="form-group">
+                    <label for="lab" class="form-label">Select Lab</label>
+                    <select id="lab" name="lab" class="form-control" required>
+                        <option value="">-- Select a Lab --</option>
+                        <option value="lab101">Lab 101 - Chemistry</option>
+                        <option value="lab102">Lab 102 - Physics</option>
+                        <option value="lab103">Lab 103 - Biology</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" id="date" name="date" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="time" class="form-label">Time Slot</label>
+                    <select id="time" name="time" class="form-control" required>
+                        <option value="">-- Select a Time Slot --</option>
+                        <option value="morning">9:00 AM - 12:00 PM</option>
+                        <option value="afternoon">1:00 PM - 4:00 PM</option>
+                        <option value="evening">5:00 PM - 8:00 PM</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="purpose" class="form-label">Purpose</label>
+                    <textarea id="purpose" name="purpose" rows="3" class="form-control" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-block">Book Now</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
